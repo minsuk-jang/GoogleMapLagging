@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_main"
+    app:startDestination="@id/main">
+
+    <fragment
+        android:id="@+id/main"
+        android:name="com.example.googlemaplagging.MainFragment" >
+        <action
+            android:id="@+id/action_main_to_main_bottom"
+            app:destination="@id/main_bottom" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/main_bottom"
+        android:name="com.example.googlemaplagging.MainBottomSheetDialogFragment" >
+        <action
+            android:id="@+id/action_main_bottom_to_detail"
+            app:destination="@id/detail" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.example.googlemaplagging.DetailFragment" />
+
+</navigation>

@@ -12,13 +12,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setMainFragment()
-
-    }
-
-    private fun setMainFragment() {
-        supportFragmentManager.beginTransaction().apply {
-            add(binding.frameLayout.id, MainFragment.newInstance())
-        }.commit()
     }
 }

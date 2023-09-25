@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.example.googlemaplagging.base.BaseFragment
 import com.example.googlemaplagging.databinding.FragmentMainBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -44,20 +45,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            moveToDetail()
+            findNavController().navigate(R.id.action_main_to_main_bottom)
         }
     }
 
-    private fun moveToDetail() {
-        val id = requireActivity().findViewById<FrameLayout?>(R.id.frame_layout)?.id ?: return
-
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            add(id, DetailFragment.newInstance())
-        }.commit()
-    }
-
     override fun onMapReady(p0: GoogleMap) {
-        Log.e(TAG, "onMapReady: ")
         map = p0
 
         val sydney = LatLng(-34.0, 151.0)
