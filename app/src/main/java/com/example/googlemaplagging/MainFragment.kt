@@ -3,6 +3,7 @@ package com.example.googlemaplagging
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import com.example.googlemaplagging.base.BaseFragment
 import com.example.googlemaplagging.databinding.FragmentMainBinding
@@ -32,11 +33,27 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         super.onViewCreated(view, savedInstanceState)
 
         bindMapFragment()
+        bindButton()
     }
 
     private fun bindMapFragment() {
-        val supportFragment = childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
+        val supportFragment =
+            childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
         supportFragment?.getMapAsync(this)
+    }
+
+    private fun bindButton() {
+        binding.buttonMoveDetail.setOnClickListener {
+            moveToDetail()
+        }
+    }
+
+    private fun moveToDetail() {
+        val id = requireActivity().findViewById<FrameLayout?>(R.id.frame_layout)?.id ?: return
+
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(id, DetailFragment.newInstance())
+        }.commit()
     }
 
     override fun onMapReady(p0: GoogleMap) {
@@ -49,6 +66,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                 .title("Marker is Sydney")
         })
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
     }
 }
