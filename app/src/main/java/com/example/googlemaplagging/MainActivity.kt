@@ -2,6 +2,7 @@ package com.example.googlemaplagging
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.googlemaplagging.base.BaseActivity
 import com.example.googlemaplagging.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +13,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         setMainFragment()
+
     }
 
     private fun setMainFragment() {
