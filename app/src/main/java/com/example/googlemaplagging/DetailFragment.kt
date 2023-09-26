@@ -2,7 +2,9 @@ package com.example.googlemaplagging
 
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import androidx.core.os.bundleOf
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import com.example.googlemaplagging.base.BaseFragment
 import com.example.googlemaplagging.databinding.FragmentDetailBinding
@@ -23,6 +25,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     }
 
     override fun back() {
-        findNavController().popBackStack()
+        //findNavController().popBackStack()
+        val id = requireActivity().findViewById<FrameLayout?>(R.id.frame_layout)?.id ?: return
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(id, MainFragment.newInstance())
+        }.commit()
     }
 }

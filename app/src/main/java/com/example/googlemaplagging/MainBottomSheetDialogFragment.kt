@@ -3,6 +3,7 @@ package com.example.googlemaplagging
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import androidx.fragment.app.FragmentContainer
 import androidx.navigation.fragment.findNavController
 import com.example.googlemaplagging.base.BaseBottomSheetDialogFragment
 import com.example.googlemaplagging.databinding.FragmentMainBottomSheetDialogBinding
@@ -18,7 +19,14 @@ class MainBottomSheetDialogFragment :
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            findNavController().navigate(R.id.action_main_bottom_to_detail)
+            val id = requireActivity().findViewById<FrameLayout?>(R.id.frame_layout)?.id
+                ?: return@setOnClickListener
+
+            requireActivity().supportFragmentManager.beginTransaction().apply {
+                replace(id, DetailFragment.newInstance())
+            }.commit()
+            dismiss()
+            //findNavController().navigate(R.id.action_main_bottom_to_detail)
         }
     }
 }
