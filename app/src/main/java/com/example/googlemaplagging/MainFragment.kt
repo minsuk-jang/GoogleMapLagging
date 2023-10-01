@@ -45,10 +45,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            //findNavController().navigate(R.id.action_main_to_main_bottom)
-            val dialog = MainBottomSheetDialogFragment()
-            dialog.show(requireActivity().supportFragmentManager, "tag")
-
+            findNavController().navigate(R.id.action_main_to_main_bottom)
         }
     }
 

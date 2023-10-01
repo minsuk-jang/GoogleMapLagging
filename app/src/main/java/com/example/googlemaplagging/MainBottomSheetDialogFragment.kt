@@ -19,14 +19,7 @@ class MainBottomSheetDialogFragment :
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            val id = requireActivity().findViewById<FrameLayout?>(R.id.frame_layout)?.id
-                ?: return@setOnClickListener
-
-            requireActivity().supportFragmentManager.beginTransaction().apply {
-                replace(id, DetailFragment.newInstance())
-            }.commit()
-            dismiss()
-            //findNavController().navigate(R.id.action_main_bottom_to_detail)
+            findNavController().navigate(R.id.action_main_bottom_to_detail)
         }
     }
 }

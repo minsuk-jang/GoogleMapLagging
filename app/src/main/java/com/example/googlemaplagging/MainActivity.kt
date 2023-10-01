@@ -12,13 +12,5 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        bindMainFragment()
-    }
-
-    private fun bindMainFragment(){
-        supportFragmentManager.beginTransaction().apply {
-            add(binding.frameLayout.id,MainFragment.newInstance())
-        }.commit()
     }
 }

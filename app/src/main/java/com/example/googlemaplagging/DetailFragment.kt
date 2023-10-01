@@ -25,10 +25,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     }
 
     override fun back() {
-        //findNavController().popBackStack()
-        val id = requireActivity().findViewById<FrameLayout?>(R.id.frame_layout)?.id ?: return
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            replace(id, MainFragment.newInstance())
-        }.commit()
+        findNavController().popBackStack()
     }
 }
