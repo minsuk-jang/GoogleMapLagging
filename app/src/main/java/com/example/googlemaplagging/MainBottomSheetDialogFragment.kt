@@ -24,9 +24,9 @@ class MainBottomSheetDialogFragment :
 
             requireActivity().supportFragmentManager.beginTransaction().apply {
                 replace(id, DetailFragment.newInstance())
+                addToBackStack(null)
             }.commit()
             dismiss()
-            //findNavController().navigate(R.id.action_main_bottom_to_detail)
         }
     }
 }
