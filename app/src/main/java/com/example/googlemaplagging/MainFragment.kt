@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.googlemaplagging.base.BaseFragment
 import com.example.googlemaplagging.databinding.FragmentMainBinding
+import com.example.googlemaplagging.extensions.logging
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapFragment
@@ -33,19 +34,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.e(TAG, "onCreateView: ")
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e(TAG, "onViewCreated: ")
 
+        logging(name = "Main")
         bindMapFragment()
         bindButton()
     }
@@ -58,8 +50,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
+            val supportFragment =
+                childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
+                    ?: return@setOnClickListener
+
             val dialog = MainBottomSheetDialogFragment()
-            dialog.show(requireActivity().supportFragmentManager, "tag")
+            dialog.show(supportFragment.childFragmentManager, "tag")
         }
     }
 
@@ -73,35 +69,5 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         })
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.e(TAG, "onStart: ")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.e(TAG, "onResume: ")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.e(TAG, "onPause: ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e(TAG, "onStop: ")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.e(TAG, "onDestroyView: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e(TAG, "onDestroy: ")
     }
 }
