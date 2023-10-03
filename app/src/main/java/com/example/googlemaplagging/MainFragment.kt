@@ -34,10 +34,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.e(TAG, "onCreateView: ")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        logging(name = "Main")
+        Log.e(TAG, "onViewCreated: ")
+
         bindMapFragment()
         bindButton()
     }
@@ -45,17 +55,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     private fun bindMapFragment() {
         val supportFragment =
             childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
+
         supportFragment?.getMapAsync(this)
     }
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            val supportFragment =
-                childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
-                    ?: return@setOnClickListener
-
             val dialog = MainBottomSheetDialogFragment()
-            dialog.show(supportFragment.childFragmentManager, "tag")
+            dialog.show(parentFragmentManager, "tag")
         }
     }
 
@@ -69,5 +76,31 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         })
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG, "onStart: ")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG, "onPause: ")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(TAG, "onStop: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(TAG, "onDestroy: ")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e(TAG, "onDestroyView: ")
+
     }
 }
