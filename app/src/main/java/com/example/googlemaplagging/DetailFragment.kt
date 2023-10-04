@@ -24,7 +24,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logging(name = "Detail")
     }
 
     override fun back() {

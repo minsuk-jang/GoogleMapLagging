@@ -25,6 +25,7 @@ import kotlin.math.log
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
+    private var isFirst: Boolean = true
 
     companion object {
         fun newInstance(): MainFragment {
@@ -55,18 +56,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     private fun bindMapFragment() {
         val supportFragment =
             childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
-
         supportFragment?.getMapAsync(this)
     }
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-
-            val supportFragment =
-                childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment ?: return@setOnClickListener
-
             val dialog = MainBottomSheetDialogFragment()
-            dialog.show(supportFragment.childFragmentManager, "tag")
+            dialog.show(parentFragmentManager, "tag")
         }
     }
 
@@ -106,5 +102,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         super.onDestroyView()
         Log.e(TAG, "onDestroyView: ")
 
+        /*val supportFragment =
+            childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment ?: return
+        supportFragment.onDestroy()*/
     }
 }

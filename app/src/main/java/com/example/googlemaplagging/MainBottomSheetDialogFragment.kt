@@ -18,13 +18,12 @@ class MainBottomSheetDialogFragment :
         super.onViewCreated(view, savedInstanceState)
         bindButton()
 
-        logging(name = "Dialog")
     }
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
             parentFragmentManager.beginTransaction().apply {
-                replace(R.id.fragment_map, DetailFragment.newInstance())
+                replace(R.id.frame_layout, DetailFragment.newInstance())
                 addToBackStack(null)
             }.commit()
 
