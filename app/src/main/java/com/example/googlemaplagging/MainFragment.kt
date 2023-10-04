@@ -61,8 +61,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
+
+            val supportFragment =
+                childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment ?: return@setOnClickListener
+
             val dialog = MainBottomSheetDialogFragment()
-            dialog.show(parentFragmentManager, "tag")
+            dialog.show(supportFragment.childFragmentManager, "tag")
         }
     }
 
