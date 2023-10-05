@@ -35,19 +35,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.e(TAG, "onCreateView: ")
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.e(TAG, "onViewCreated: ")
 
         bindMapFragment()
         bindButton()
@@ -61,8 +50,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            val dialog = MainBottomSheetDialogFragment()
-            dialog.show(parentFragmentManager, "tag")
+            parentFragmentManager.beginTransaction().apply {
+                add(R.id.frame_layout, FakeFragment.newInstance())
+            }.commit()
+
+            /*val dialog = MainBottomSheetDialogFragment()
+            dialog.show(parentFragmentManager, "tag")*/
         }
     }
 
@@ -76,11 +69,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         })
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.e(TAG, "onStart: ")
     }
 
     override fun onPause() {

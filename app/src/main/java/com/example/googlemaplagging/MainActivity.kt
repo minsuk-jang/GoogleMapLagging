@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         bindMainFragment()
-        timer()
+        //timer()
     }
 
     private fun bindMainFragment() {
