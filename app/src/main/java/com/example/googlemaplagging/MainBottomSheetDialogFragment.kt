@@ -1,6 +1,9 @@
 package com.example.googlemaplagging
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
@@ -22,12 +25,22 @@ class MainBottomSheetDialogFragment :
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
-            parentFragmentManager.beginTransaction().apply {
-                replace(R.id.frame_layout, DetailFragment.newInstance())
+            /*parentFragmentManager.beginTransaction().apply {
+                replace(R.id.frame_layout,DetailFragment.newInstance())
                 addToBackStack(null)
-            }.commit()
-
+            }.commit()*/
+            Log.e(TAG, "Before: ${requireActivity().supportFragmentManager.fragments} ")
             dismiss()
+
+            val supportFm = requireActivity().supportFragmentManager
+            Handler(Looper.getMainLooper()).post {
+                Log.e(TAG, "After: ${supportFm.fragments}")
+
+                supportFm.beginTransaction().apply {
+                    replace(R.id.frame_layout, DetailFragment.newInstance())
+                    addToBackStack(null)
+                }.commit()
+            }
         }
     }
 

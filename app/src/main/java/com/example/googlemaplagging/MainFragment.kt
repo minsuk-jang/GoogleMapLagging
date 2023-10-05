@@ -13,6 +13,7 @@ import com.example.googlemaplagging.databinding.FragmentMainBinding
 import com.example.googlemaplagging.extensions.logging
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -56,11 +57,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     private fun bindMapFragment() {
         val supportFragment =
             childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
+
         supportFragment?.getMapAsync(this)
     }
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
+            /*parentFragmentManager.beginTransaction().apply {
+                replace(R.id.frame_layout, DetailFragment.newInstance())
+                addToBackStack(null)
+            }.commit()*/
+
             val dialog = MainBottomSheetDialogFragment()
             dialog.show(parentFragmentManager, "tag")
         }
@@ -101,9 +108,5 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     override fun onDestroyView() {
         super.onDestroyView()
         Log.e(TAG, "onDestroyView: ")
-
-        /*val supportFragment =
-            childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment ?: return
-        supportFragment.onDestroy()*/
     }
 }

@@ -17,12 +17,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         bindMainFragment()
-        timer()
+        //timer()
     }
 
     private fun bindMainFragment() {
         supportFragmentManager.beginTransaction().apply {
-            add(binding.frameLayout.id, MainFragment.newInstance())
+            replace(binding.frameLayout.id, MainFragment.newInstance())
         }.commit()
     }
 

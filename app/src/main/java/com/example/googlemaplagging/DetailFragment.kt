@@ -27,6 +27,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     }
 
     override fun back() {
+        Log.e(TAG, "List: ${parentFragmentManager.fragments}")
+
         parentFragmentManager.popBackStack()
     }
 }
