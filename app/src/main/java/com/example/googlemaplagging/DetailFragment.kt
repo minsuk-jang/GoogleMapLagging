@@ -1,6 +1,7 @@
 package com.example.googlemaplagging
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.os.bundleOf
@@ -25,6 +26,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     }
 
     override fun back() {
+        Log.e(TAG, "List: ${parentFragmentManager.fragments}")
         findNavController().popBackStack()
     }
 }
