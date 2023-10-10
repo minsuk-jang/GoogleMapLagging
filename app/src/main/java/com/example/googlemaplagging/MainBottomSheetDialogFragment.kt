@@ -3,12 +3,8 @@ package com.example.googlemaplagging
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
-import androidx.fragment.app.FragmentContainer
-import androidx.navigation.fragment.findNavController
 import com.example.googlemaplagging.base.BaseBottomSheetDialogFragment
 import com.example.googlemaplagging.databinding.FragmentMainBottomSheetDialogBinding
-import com.example.googlemaplagging.extensions.logging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,8 +22,6 @@ class MainBottomSheetDialogFragment :
                 replace(R.id.frame_layout, DetailFragment.newInstance())
                 addToBackStack(null)
             }.commit()
-
-            dismiss()
         }
     }
 
