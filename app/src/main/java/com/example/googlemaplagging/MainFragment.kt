@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), OnMapReadyCallback {
 
@@ -38,11 +39,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     private fun bindMapFragment() {
         val supportFragment =
             childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
+
         supportFragment?.getMapAsync(this)
     }
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
+            /*parentFragmentManager.beginTransaction().apply {
+                replace(R.id.frame_layout, DetailFragment.newInstance())
+                addToBackStack(null)
+            }.commit()*/
+
             val dialog = MainBottomSheetDialogFragment()
             dialog.show(parentFragmentManager, "tag")
         }
@@ -78,9 +85,5 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     override fun onDestroyView() {
         super.onDestroyView()
         Log.e(TAG, "onDestroyView: ")
-
-        /*val supportFragment =
-            childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment ?: return
-        supportFragment.onDestroy()*/
     }
 }
