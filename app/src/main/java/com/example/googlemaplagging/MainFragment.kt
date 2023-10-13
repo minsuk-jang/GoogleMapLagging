@@ -2,12 +2,17 @@ package com.example.googlemaplagging
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
 import com.example.googlemaplagging.base.BaseFragment
 import com.example.googlemaplagging.databinding.FragmentMainBinding
+import com.example.googlemaplagging.extensions.logging
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -19,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
-    private var isFirst: Boolean = true
 
     companion object {
         fun newInstance(): MainFragment {
@@ -29,25 +33,36 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        if(savedInstanceState != null)
+            Log.e(TAG, "Main is Recreated!! ")
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bindMapFragment()
+        //bindMapFragment()
         bindButton()
+
+        logging("main")
     }
 
     private fun bindMapFragment() {
         val supportFragment =
             childFragmentManager.findFragmentById(R.id.fragment_map) as? SupportMapFragment
-
         supportFragment?.getMapAsync(this)
     }
 
     private fun bindButton() {
         binding.buttonMoveDetail.setOnClickListener {
             /*parentFragmentManager.beginTransaction().apply {
-                replace(R.id.frame_layout, DetailFragment.newInstance())
-                addToBackStack(null)
+                add(R.id.frame_layout, FakeFragment.newInstance())
             }.commit()*/
 
             val dialog = MainBottomSheetDialogFragment()
@@ -65,25 +80,5 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         })
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.e(TAG, "onPause: ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e(TAG, "onStop: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e(TAG, "onDestroy: ")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.e(TAG, "onDestroyView: ")
     }
 }

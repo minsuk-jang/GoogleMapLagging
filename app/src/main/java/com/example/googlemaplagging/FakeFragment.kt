@@ -1,9 +1,11 @@
 package com.example.googlemaplagging
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.googlemaplagging.base.BaseFragment
 import com.example.googlemaplagging.databinding.FragmentMainBottomSheetDialogBinding
+import com.example.googlemaplagging.extensions.logging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,10 +29,21 @@ class FakeFragment :
         binding.buttonMoveDetail.setOnClickListener {
             parentFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
+                remove(this@FakeFragment)
+            }.commit()
+
+            parentFragmentManager.beginTransaction().apply {
                 replace(R.id.frame_layout, DetailFragment.newInstance())
                 addToBackStack(null)
-                postponeEnterTransition()
             }.commit()
+
+            logging("fake")
         }
+    }
+
+    override fun back() {
+        /*parentFragmentManager.beginTransaction().apply {
+            remove(this@FakeFragment)
+        }.commit()*/
     }
 }

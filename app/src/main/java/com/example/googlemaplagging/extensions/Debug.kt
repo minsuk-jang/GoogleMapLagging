@@ -7,9 +7,11 @@ import com.example.googlemaplagging.TAG
 fun Fragment.logging(name: String) {
     Log.e(
         TAG,
-        "Name: $name\n" +
+        "=======================================================================\n" +
+                "Name: $name\n" +
                 "Activity: ${requireActivity().supportFragmentManager.fragments}\n" +
                 "parent: ${parentFragmentManager.fragments}\n" +
-                "child: ${childFragmentManager.fragments}",
+                "child: ${childFragmentManager.fragments}\n" +
+                "=======================================================================",
     )
 }
